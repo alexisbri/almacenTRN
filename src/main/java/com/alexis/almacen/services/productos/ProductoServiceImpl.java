@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 public class ProductoServiceImpl implements ProductoService {
 
-    private  final ProductoRepository productoRepository;
+    private final ProductoRepository productoRepository;
 
     private final ProductoMapper productoMapper;
 
@@ -96,7 +96,7 @@ public class ProductoServiceImpl implements ProductoService {
 
         productoRepository.delete(producto);
 
-        log.info("Produco con id {} eliminar", id);
+        log.info("Producto con id {} eliminar", id);
 
     }
 

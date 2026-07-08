@@ -1,6 +1,6 @@
 package com.alexis.almacen.exceptions;
 
-import com.alexis.almacen.dto.sucursales.CustomErrorResponse;
+import com.alexis.almacen.dto.CustomErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;

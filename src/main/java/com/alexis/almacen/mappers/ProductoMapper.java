@@ -6,10 +6,14 @@ import com.alexis.almacen.entities.Producto;
 import com.alexis.almacen.enums.Categoria;
 import org.springframework.stereotype.Component;
 
+// marca una clase como un Bean gestionado por Spring,
+// permitiendo que Spring la detecte automáticamente y
+// la administre en su contenedor de IoC (Inversión de Control).
 @Component
 
 public class ProductoMapper {
 
+    // Metodo
     public Producto requestAEntidad(ProductoRequest request, Categoria categoria) {
 
         if (request == null) return null;

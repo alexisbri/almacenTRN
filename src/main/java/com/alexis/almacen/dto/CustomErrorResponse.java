@@ -1,4 +1,4 @@
-package com.alexis.almacen.dto.sucursales;
+package com.alexis.almacen.dto;
 
 public record CustomErrorResponse(
         int codigo,
