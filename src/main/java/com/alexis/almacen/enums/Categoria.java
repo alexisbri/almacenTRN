@@ -29,7 +29,7 @@ public enum Categoria {
     /// Atributo:
     private final String descripcion;
 
-    public static Categoria obtenerCategoriaPorDescripción(String descripcion) {
+    public static Categoria obtenerCategoriaPorDescripcion(String descripcion) {
 
         /// Alerta para errores del cliente
         StringCustomUtils.validarNoVacio(descripcion, "La descripción es requerida");
