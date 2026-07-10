@@ -7,6 +7,10 @@ import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
+/// se usa para CREAR o ACTUALIZAR productos
+/// (métodos POST y PUT), donde los datos son obligatorios.
+/// Para consultas, aqui no es el sitio.
+
 public record ProductoRequest(
 
         @NotBlank(message = "El nombre es requerido")

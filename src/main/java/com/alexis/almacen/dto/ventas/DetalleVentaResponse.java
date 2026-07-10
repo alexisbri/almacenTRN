@@ -1,4 +1,13 @@
 package com.alexis.almacen.dto.ventas;
 
-public record DetalleVentaResponse() {
-}
+import java.math.BigDecimal;
+
+public record DetalleVentaResponse(
+
+        Long idProducto,
+        String nombreProducto,
+        Integer cantidadProducto,
+        BigDecimal precioProducto,
+        BigDecimal subtotal
+
+) {}

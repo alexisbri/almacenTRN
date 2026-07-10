@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -21,12 +22,14 @@ import java.util.List;
 public class ProductoServiceImpl implements ProductoService {
 
     private final ProductoRepository productoRepository;
-
     private final ProductoMapper productoMapper;
 
-    @Override
+    @Override // indica que este metodo está sobrescribiendo un metodo de la clase padre o de una interfaz.
     @Transactional(readOnly = true)
-    public List<ProductoResponse> listar() {
+    public List<ProductoResponse> listar(
+            String nombre, String categoria,
+            BigDecimal precioMin, BigDecimal precioMax
+    ) {
 
         log.info("Listar todos los productos");
 
@@ -34,12 +37,12 @@ public class ProductoServiceImpl implements ProductoService {
                 .map(productoMapper::entidadResponse).toList();
     }
 
+
     @Override
     @Transactional(readOnly = true)
     public ProductoResponse obtenerPorId(long id) {
         return productoMapper.entidadResponse(obtenerProductoOException(id));
     }
-
 
 
     @Override
@@ -57,6 +60,7 @@ public class ProductoServiceImpl implements ProductoService {
 
         return productoMapper.entidadResponse(producto);
     }
+
 
     @Override
     public ProductoResponse actualizar(ProductoRequest request, Long id) {
@@ -82,11 +86,7 @@ public class ProductoServiceImpl implements ProductoService {
 
         return productoMapper.entidadResponse(producto);
 
-
-
     }
-
-
 
 
     @Override
@@ -101,15 +101,35 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
 
-
-
-
-
     private Producto obtenerProductoOException(Long id) {
         log.info("Buscando producto con id: {}", id);
 
         return productoRepository.findById(id).orElseThrow(
                 () -> new RecursoNoEncontradoException("Producto no encontrado con id: " + id));
     }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ProductoResponse> busquedaProductoDinamico(
+            String nombre,
+            String categoria,
+            BigDecimal precioMin,
+            BigDecimal precioMax
+    ) {
+        log.info("Buscando producto dinamico...");
+
+        Categoria categoriaEnum = Categoria.obtenerCategoriaPorDescripcion(categoria);
+
+        List<Producto> productos = productoRepository.busquedaProductoDinamico(
+                nombre, categoriaEnum, precioMin, precioMax
+        );
+
+        return productos.stream()
+                .map(productoMapper::entidadResponse)
+                .toList();
+
+    }
+
 
 }
