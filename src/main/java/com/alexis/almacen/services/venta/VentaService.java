@@ -1,4 +1,4 @@
-package com.alexis.almacen.services;
+package com.alexis.almacen.services.venta;
 
 import com.alexis.almacen.dto.ventas.VentaRequest;
 import com.alexis.almacen.dto.ventas.VentaResponse;
@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface VentaService {
 
-    List<VentaResponse> listarActivas();
+//    List<VentaResponse> listarActivas();
 
-    List<VentaResponse> listarCanceladas();
+//    List<VentaResponse> listarCanceladas();
 
-    VentaResponse obtenerPorIdActiva(long id);
+//    VentaResponse obtenerPorIdActiva(long id);
 
     VentaResponse registrar(VentaRequest request);
 
-    VentaResponse cancelar(Long id);
+//    VentaResponse cancelar(Long id);
 
 }

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /// Administra las peticiones y respuestas HTTP
@@ -24,8 +25,14 @@ public class ProductoController {
     private final ProductoService productoService;
 
     @GetMapping
-    public ResponseEntity<List<ProductoResponse>> listar() {
-        return ResponseEntity.ok(productoService.listar());
+    public ResponseEntity<List<ProductoResponse>> listar(
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) String categoria,
+            @RequestParam(required = false)BigDecimal precioMin,
+            @RequestParam(required = false)BigDecimal precioMax
+            ) {
+        return ResponseEntity.ok(productoService.listar(
+                nombre, categoria, precioMin, precioMax));
     }
 
     // Al agregar @PathVariable hace uno referencia objetos en concreto como id que ira
@@ -65,6 +72,18 @@ public class ProductoController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/dinamico")
+    public ResponseEntity<List<ProductoResponse>> busquedaProductoDinamicoImpl(
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) String categoria,
+            @RequestParam(required = false) BigDecimal precioMin,
+            @RequestParam(required = false) BigDecimal precioMax
+    ) {
+        List<ProductoResponse> productos = productoService.busquedaProductoDinamico(
+                nombre, categoria, precioMin, precioMax
+        );
+        return ResponseEntity.ok(productos);
+    }
 
 
 
